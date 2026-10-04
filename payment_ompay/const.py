@@ -1,5 +1,30 @@
 # Part of the OMPAY payment provider for Odoo.
 
+from odoo.addons.payment.const import SENSITIVE_KEYS as PAYMENT_SENSITIVE_KEYS
+
+# Keys that must never reach a log file.
+#
+# Odoo logs the body of every API request it sends, and `payment`'s own
+# SENSITIVE_KEYS set is empty by default: each provider is responsible for
+# declaring its own. Without this, the Merchant Hosted flow would write full card
+# numbers and CVVs into the server log in plain text, which PCI DSS forbids.
+#
+# Updating the shared set is what makes the masking apply, because the logging
+# happens inside the `payment` module, not here.
+SENSITIVE_KEYS = {
+    'card',
+    'number',
+    'cvv',
+    'exp_month',
+    'exp_year',
+    'holder_name',
+    'token',
+    'saved_card',
+    'dpan',
+    'cryptogram',
+}
+PAYMENT_SENSITIVE_KEYS.update(SENSITIVE_KEYS)
+
 # API base URLs. Odoo's native provider `state` decides which one is used:
 # `enabled` means live, anything else (`test`) means sandbox.
 API_URLS = {

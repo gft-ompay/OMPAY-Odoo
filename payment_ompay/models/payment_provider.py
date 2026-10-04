@@ -7,7 +7,7 @@ from odoo.addons.payment.logging import get_payment_logger
 from odoo.addons.payment_ompay import const
 
 
-_logger = get_payment_logger(__name__)
+_logger = get_payment_logger(__name__, const.SENSITIVE_KEYS)
 
 
 class PaymentProvider(models.Model):
