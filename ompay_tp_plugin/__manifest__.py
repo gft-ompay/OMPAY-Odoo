@@ -20,15 +20,15 @@
     ],
     'depends': ['payment'],
     'data': [
-        'views/payment_ompay_templates.xml',
+        'views/ompay_tp_plugin_templates.xml',
         'views/payment_provider_views.xml',
 
         'data/payment_provider_data.xml',
     ],
     'assets': {
         'web.assets_frontend': [
-            'payment_ompay/static/src/js/payment_form.js',
-            'payment_ompay/static/src/scss/payment_ompay.scss',
+            'ompay_tp_plugin/static/src/js/payment_form.js',
+            'ompay_tp_plugin/static/src/scss/ompay_tp_plugin.scss',
         ],
     },
     'post_init_hook': 'post_init_hook',

@@ -16,8 +16,8 @@ You need:
 
 **Self-hosted**
 
-1. Extract this archive so the `payment_ompay` folder sits inside your addons
-   path, for example `/opt/odoo/addons/payment_ompay`.
+1. Extract this archive so the `ompay_tp_plugin` folder sits inside your addons
+   path, for example `/opt/odoo/addons/ompay_tp_plugin`.
 2. Restart the Odoo service.
 3. In Odoo, enable Developer Mode (Settings → General Settings → Developer
    Tools), then go to **Apps** and click **Update Apps List**.
@@ -25,7 +25,7 @@ You need:
 
 **Odoo.sh**
 
-1. Add the `payment_ompay` folder to your project's Git repository.
+1. Add the `ompay_tp_plugin` folder to your project's Git repository.
 2. Commit and push. Odoo.sh rebuilds automatically.
 3. Go to **Apps**, search for **OMPAY**, and click **Install**.
 

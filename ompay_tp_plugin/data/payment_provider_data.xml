@@ -4,14 +4,14 @@
     <record id="payment_provider_ompay" model="payment.provider">
         <field name="name">OMPAY</field>
         <field name="code">ompay</field>
-        <field name="image_128" type="base64" file="payment_ompay/static/description/icon.png"/>
-        <field name="module_id" ref="base.module_payment_ompay"/>
+        <field name="image_128" type="base64" file="ompay_tp_plugin/static/description/icon.png"/>
+        <field name="module_id" ref="base.module_ompay_tp_plugin"/>
         <field name="payment_method_ids"
                eval="[Command.set([
                          ref('payment.payment_method_card'),
                      ])]"/>
-        <field name="redirect_form_view_id" ref="payment_ompay.redirect_form"/>
-        <field name="inline_form_view_id" ref="payment_ompay.inline_form"/>
+        <field name="redirect_form_view_id" ref="ompay_tp_plugin.redirect_form"/>
+        <field name="inline_form_view_id" ref="ompay_tp_plugin.inline_form"/>
     </record>
 
     <!--

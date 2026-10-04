@@ -7,9 +7,9 @@ Each branch targets one Odoo series, which is the layout the
 
 | Branch | Odoo | Modules |
 |--------|------|---------|
-| `19.0` | 19.0 | `payment_ompay` |
+| `19.0` | 19.0 | `ompay_tp_plugin` |
 
-## payment_ompay
+## ompay_tp_plugin
 
 Accept card payments in Omani Rial through OMPAY, using either the Bank Hosted
 redirect or the Merchant Hosted on-site card form.
@@ -34,7 +34,7 @@ every outcome is confirmed by a server-to-server status inquiry.
 
 ### Installation
 
-Copy `payment_ompay` into your addons path, update the apps list, and install
+Copy `ompay_tp_plugin` into your addons path, update the apps list, and install
 it. Then open **Accounting › Configuration › Payment Providers › OMPAY** and
 enter the API Key and API Secret issued to you.
 
@@ -51,4 +51,4 @@ support@ompay.com · [ompay.om](https://ompay.om)
 
 ### Licence
 
-LGPL-3. See [LICENSE](payment_ompay/LICENSE).
+LGPL-3. See [LICENSE](ompay_tp_plugin/LICENSE).
