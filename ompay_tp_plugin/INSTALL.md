@@ -99,4 +99,4 @@ rejected with a `402` error, the flow is not enabled for you — contact OMPAY.
 
 ## Support
 
-support@ompay.com · https://ompay.om
+pgsupport@ompay.com · https://ompay.om

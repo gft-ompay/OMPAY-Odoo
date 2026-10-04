@@ -47,7 +47,7 @@ will round against what OMPAY settles.
 
 ### Support
 
-support@ompay.com · [ompay.om](https://ompay.om)
+pgsupport@ompay.com · [ompay.om](https://ompay.om)
 
 ### Licence
 
