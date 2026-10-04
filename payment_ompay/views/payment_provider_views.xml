@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payment_provider_form" model="ir.ui.view">
+        <field name="name">OMPAY Provider Form</field>
+        <field name="model">payment.provider</field>
+        <field name="inherit_id" ref="payment.payment_provider_form"/>
+        <field name="arch" type="xml">
+            <group name="provider_credentials" position="inside">
+                <group invisible="code != 'ompay'">
+                    <field
+                        name="ompay_api_key"
+                        string="API Key"
+                        required="code == 'ompay' and state != 'disabled'"
+                    />
+                    <field
+                        name="ompay_api_secret"
+                        string="API Secret"
+                        password="True"
+                        required="code == 'ompay' and state != 'disabled'"
+                    />
+                    <field name="ompay_flow" string="Checkout Flow" widget="radio"/>
+                    <field
+                        name="ompay_pci_ack"
+                        string="PCI DSS SAQ D Confirmed"
+                        invisible="ompay_flow != 'merchant_hosted'"
+                        required="code == 'ompay' and ompay_flow == 'merchant_hosted'"
+                    />
+                    <div colspan="2" class="alert alert-warning mb-0"
+                         invisible="ompay_flow != 'merchant_hosted'">
+                        The Merchant Hosted flow sends full card numbers through your own server.
+                        That places your business in PCI DSS SAQ D scope, the heaviest compliance
+                        tier. Bank Hosted keeps card data entirely off your infrastructure and is
+                        the recommended option for most merchants.
+                    </div>
+                    <div colspan="2" class="text-muted" invisible="code != 'ompay'">
+                        <small>
+                            Credentials are environment-specific. A provider left in
+                            <b>Test Mode</b> uses the OMPAY sandbox; setting it to
+                            <b>Enabled</b> switches to the live API, so paste the matching
+                            key pair.
+                        </small>
+                    </div>
+                </group>
+            </group>
+        </field>
+    </record>
+
+</odoo>

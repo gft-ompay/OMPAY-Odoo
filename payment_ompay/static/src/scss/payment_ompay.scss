@@ -1,0 +1,20 @@
+// OMPAY inline card form.
+// Palette follows OMPay Guideline 2025 (V1.0): Deep Sea is the primary colour.
+
+$o-ompay-deep-sea: #2d13ea;
+
+.o_ompay_inline_form {
+
+    .form-control {
+        border-color: rgba($o-ompay-deep-sea, .35);
+
+        &:focus {
+            border-color: $o-ompay-deep-sea;
+            box-shadow: 0 0 0 .2rem rgba($o-ompay-deep-sea, .2);
+        }
+    }
+
+    .form-label {
+        font-weight: 600;
+    }
+}

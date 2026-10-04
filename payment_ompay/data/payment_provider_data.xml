@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <record id="payment_provider_ompay" model="payment.provider">
+        <field name="name">OMPAY</field>
+        <field name="code">ompay</field>
+        <field name="image_128" type="base64" file="payment_ompay/static/description/icon.png"/>
+        <field name="module_id" ref="base.module_payment_ompay"/>
+        <field name="payment_method_ids"
+               eval="[Command.set([
+                         ref('payment.payment_method_card'),
+                     ])]"/>
+        <field name="redirect_form_view_id" ref="payment_ompay.redirect_form"/>
+        <field name="inline_form_view_id" ref="payment_ompay.inline_form"/>
+    </record>
+
+    <!--
+        OMPAY sends no webhooks, so a customer who abandons the hosted payment page
+        would otherwise leave the transaction pending forever. This sweep asks
+        OMPAY for the real outcome.
+    -->
+    <record id="cron_poll_pending_transactions" model="ir.cron">
+        <field name="name">OMPAY: Poll pending transactions</field>
+        <field name="model_id" ref="payment.model_payment_transaction"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_ompay_poll_pending_transactions()</field>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">30</field>
+        <field name="interval_type">minutes</field>
+        <field name="active" eval="True"/>
+    </record>
+
+</odoo>

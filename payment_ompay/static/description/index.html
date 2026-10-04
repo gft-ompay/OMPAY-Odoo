@@ -1,0 +1,155 @@
+<section style="font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#111;line-height:1.6;">
+
+  <!-- Hero -->
+  <div style="text-align:center;padding:0 0 24px;">
+    <img src="banner.png" alt="OMPAY Payment Gateway for Odoo" style="max-width:100%;height:auto;"/>
+  </div>
+
+  <!-- Intro -->
+  <div style="max-width:900px;margin:0 auto;padding:8px 16px 32px;">
+    <h2 style="color:#2D13EA;font-size:30px;margin:0 0 12px;">Accept card payments with OMPAY</h2>
+    <p style="font-size:17px;color:#444;margin:0;">
+      OMPAY is a payment gateway for merchants in Oman. This module connects your Odoo
+      store, invoices and sales orders to the OMPAY API so you can take card payments in
+      Omani Rial and other currencies your OMPAY account supports.
+    </p>
+    <p style="font-size:17px;color:#444;margin:14px 0 0;">
+      The module is <strong>free</strong> for OMPAY merchants. You need an OMPAY merchant
+      account to use it &mdash; your API credentials are issued once onboarding is complete.
+    </p>
+  </div>
+
+  <!-- Two flows -->
+  <div style="background:#f7f7fb;padding:32px 16px;">
+    <div style="max-width:900px;margin:0 auto;">
+      <h3 style="color:#2D13EA;font-size:23px;margin:0 0 20px;text-align:center;">Two checkout flows</h3>
+      <table style="width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden;">
+        <tr style="background:#2D13EA;color:#fff;">
+          <th style="padding:14px 16px;text-align:left;font-size:15px;width:34%;">&nbsp;</th>
+          <th style="padding:14px 16px;text-align:left;font-size:15px;">Bank Hosted <span style="font-weight:normal;opacity:.85;">(recommended)</span></th>
+          <th style="padding:14px 16px;text-align:left;font-size:15px;">Merchant Hosted</th>
+        </tr>
+        <tr style="border-bottom:1px solid #e8e8ef;">
+          <td style="padding:12px 16px;font-weight:600;">Where the card is entered</td>
+          <td style="padding:12px 16px;">On a secure OMPAY page</td>
+          <td style="padding:12px 16px;">On your own checkout</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e8e8ef;background:#fbfbfe;">
+          <td style="padding:12px 16px;font-weight:600;">PCI DSS scope</td>
+          <td style="padding:12px 16px;"><strong style="color:#00B23A;">SAQ A</strong> &mdash; card data never touches your server</td>
+          <td style="padding:12px 16px;"><strong style="color:#FF7800;">SAQ D</strong> &mdash; the heaviest compliance tier</td>
+        </tr>
+        <tr>
+          <td style="padding:12px 16px;font-weight:600;">Best for</td>
+          <td style="padding:12px 16px;">Almost every merchant</td>
+          <td style="padding:12px 16px;">Merchants already certified to SAQ D</td>
+        </tr>
+      </table>
+      <p style="font-size:14px;color:#666;margin:16px 0 0;text-align:center;">
+        Merchant Hosted stays switched off until you confirm your PCI compliance in the
+        provider settings. Each flow is a separate capability on your OMPAY account.
+      </p>
+    </div>
+  </div>
+
+  <!-- What the customer sees -->
+  <div style="max-width:900px;margin:0 auto;padding:36px 16px;">
+    <h3 style="color:#2D13EA;font-size:23px;margin:0 0 8px;text-align:center;">What your customers see</h3>
+    <p style="text-align:center;color:#666;font-size:15px;margin:0 0 24px;">
+      With Bank Hosted, the customer is taken to a secure OMPAY page to pay, then returned
+      to your Odoo store once the payment is confirmed.
+    </p>
+
+    <div style="margin-bottom:28px;">
+      <img src="screenshot-payment-page.png" alt="OMPAY secure payment page with card and wallet options"
+           style="max-width:100%;height:auto;border:1px solid #e3e3ee;border-radius:8px;"/>
+      <p style="font-size:14px;color:#666;margin:10px 0 0;text-align:center;">
+        The OMPAY payment page &mdash; card or OMPAY Wallet, with the order summary alongside.
+      </p>
+    </div>
+
+    <div>
+      <img src="screenshot-payment-success.png" alt="OMPAY payment confirmation with downloadable receipt"
+           style="max-width:100%;height:auto;border:1px solid #e3e3ee;border-radius:8px;"/>
+      <p style="font-size:14px;color:#666;margin:10px 0 0;text-align:center;">
+        Confirmation with a downloadable receipt. Odoo marks the invoice paid once the
+        status is confirmed server-to-server.
+      </p>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <div style="max-width:900px;margin:0 auto;padding:36px 16px;border-top:1px solid #eee;">
+    <h3 style="color:#2D13EA;font-size:23px;margin:0 0 20px;text-align:center;">What you get</h3>
+
+    <div style="display:block;">
+      <div style="border-left:3px solid #2D13EA;padding:4px 0 4px 16px;margin-bottom:18px;">
+        <strong style="font-size:16px;">3-D Secure 2</strong><br/>
+        <span style="color:#555;">Full OTP support, including the browser data the authentication step requires.</span>
+      </div>
+      <div style="border-left:3px solid #2D13EA;padding:4px 0 4px 16px;margin-bottom:18px;">
+        <strong style="font-size:16px;">Refunds from Odoo</strong><br/>
+        <span style="color:#555;">Full and partial refunds, issued straight from the payment record. The remaining refundable balance is logged on the transaction.</span>
+      </div>
+      <div style="border-left:3px solid #2D13EA;padding:4px 0 4px 16px;margin-bottom:18px;">
+        <strong style="font-size:16px;">Automatic reconciliation</strong><br/>
+        <span style="color:#555;">A scheduled action re-checks unresolved payments every 30 minutes, so a customer who closes the browser mid-payment never leaves an order stuck.</span>
+      </div>
+      <div style="border-left:3px solid #2D13EA;padding:4px 0 4px 16px;margin-bottom:18px;">
+        <strong style="font-size:16px;">Correct Omani Rial handling</strong><br/>
+        <span style="color:#555;">OMR is a three-decimal currency. Amounts are rounded to the precision the currency actually uses, so what you charge matches what OMPAY settles.</span>
+      </div>
+      <div style="border-left:3px solid #2D13EA;padding:4px 0 4px 16px;margin-bottom:18px;">
+        <strong style="font-size:16px;">Sandbox and production</strong><br/>
+        <span style="color:#555;">A provider left in Test Mode uses the OMPAY sandbox; enabling it switches to the live API. No separate environment setting to keep in sync.</span>
+      </div>
+      <div style="border-left:3px solid #2D13EA;padding:4px 0 4px 16px;">
+        <strong style="font-size:16px;">Status you can trust</strong><br/>
+        <span style="color:#555;">The redirect back from OMPAY is never treated as proof of payment. Every outcome is confirmed by a server-to-server status inquiry.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Setup -->
+  <div style="background:#f7f7fb;padding:32px 16px;">
+    <div style="max-width:900px;margin:0 auto;">
+      <h3 style="color:#2D13EA;font-size:23px;margin:0 0 20px;text-align:center;">Set up in four steps</h3>
+      <ol style="font-size:16px;color:#444;padding-left:22px;margin:0;">
+        <li style="margin-bottom:10px;">Install the module, then open <strong>Accounting &rsaquo; Configuration &rsaquo; Payment Providers</strong> and select <strong>OMPAY</strong>.</li>
+        <li style="margin-bottom:10px;">Paste the <strong>API Key</strong> and <strong>API Secret</strong> that OMPAY issued you.</li>
+        <li style="margin-bottom:10px;">Choose your checkout flow. Leave it on <strong>Bank Hosted</strong> unless you are PCI DSS SAQ D certified.</li>
+        <li>Keep the provider in <strong>Test Mode</strong> while you verify with sandbox credentials, then set it to <strong>Enabled</strong> and swap in your production keys.</li>
+      </ol>
+      <p style="font-size:14px;color:#666;margin:18px 0 0;">
+        If your store prices in Omani Rial, check that the OMR currency is set to
+        <strong>3 decimal places</strong> under Accounting &rsaquo; Configuration &rsaquo; Currencies.
+      </p>
+    </div>
+  </div>
+
+  <!-- Requirements -->
+  <div style="max-width:900px;margin:0 auto;padding:36px 16px;">
+    <h3 style="color:#2D13EA;font-size:23px;margin:0 0 16px;">Requirements</h3>
+    <ul style="font-size:16px;color:#444;padding-left:22px;margin:0;">
+      <li style="margin-bottom:8px;">Odoo 19.0 (Community or Enterprise)</li>
+      <li style="margin-bottom:8px;">An OMPAY merchant account with API credentials</li>
+      <li style="margin-bottom:8px;">The checkout flow you intend to use enabled on your OMPAY account</li>
+      <li>Self-hosted or Odoo.sh. Odoo Online does not permit third-party modules containing Python code.</li>
+    </ul>
+  </div>
+
+  <!-- Support -->
+  <div style="background:#2D13EA;color:#fff;padding:32px 16px;text-align:center;">
+    <h3 style="font-size:23px;margin:0 0 10px;color:#fff;">Support</h3>
+    <p style="margin:0 0 12px;font-size:16px;opacity:.95;">
+      Maintained by OMPAY. For credentials, account capabilities or transaction queries,
+      contact your OMPAY account manager.
+    </p>
+    <p style="margin:0;font-size:16px;">
+      <a href="mailto:support@ompay.com" style="color:#00F7D6;text-decoration:none;font-weight:600;">support@ompay.com</a>
+      <span style="opacity:.6;margin:0 10px;">&bull;</span>
+      <a href="https://ompay.om" style="color:#00F7D6;text-decoration:none;font-weight:600;">ompay.om</a>
+    </p>
+  </div>
+
+</section>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--
+        Bank Hosted. The transaction is created server side and `api_url` already
+        points at the OMPAY payment page, so this form carries no parameters.
+    -->
+    <template id="redirect_form">
+        <form t-att-action="api_url" method="get"/>
+    </template>
+
+    <!--
+        Merchant Hosted. Card details are collected here and posted to the OMPAY
+        API from the server. Fields are deliberately not named like a normal Odoo
+        form input: nothing here is submitted with the surrounding page.
+    -->
+    <template id="inline_form">
+        <div t-attf-id="o_ompay_inline_form_{{provider_id}}" class="o_ompay_inline_form">
+            <div class="alert alert-info py-2 mb-3" t-if="provider_sudo.state == 'test'">
+                <small>
+                    <b>Test mode.</b>
+                    No real money will move. Amounts ending in 00 are declined on purpose.
+                </small>
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label mb-1" t-attf-for="o_ompay_card_number_{{provider_id}}">
+                    <small>Card number</small>
+                </label>
+                <input type="text"
+                       t-attf-id="o_ompay_card_number_{{provider_id}}"
+                       name="o_ompay_card_number"
+                       class="form-control"
+                       inputmode="numeric"
+                       autocomplete="cc-number"
+                       maxlength="23"
+                       placeholder="1234 5678 9012 3456"/>
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label mb-1" t-attf-for="o_ompay_card_holder_{{provider_id}}">
+                    <small>Name on card</small>
+                </label>
+                <input type="text"
+                       t-attf-id="o_ompay_card_holder_{{provider_id}}"
+                       name="o_ompay_card_holder"
+                       class="form-control"
+                       autocomplete="cc-name"/>
+            </div>
+
+            <div class="row">
+                <div class="col-7 mb-0">
+                    <label class="form-label mb-1" t-attf-for="o_ompay_card_expiry_{{provider_id}}">
+                        <small>Expiry (MM / YY)</small>
+                    </label>
+                    <input type="text"
+                           t-attf-id="o_ompay_card_expiry_{{provider_id}}"
+                           name="o_ompay_card_expiry"
+                           class="form-control"
+                           inputmode="numeric"
+                           autocomplete="cc-exp"
+                           maxlength="7"
+                           placeholder="12 / 28"/>
+                </div>
+                <div class="col-5 mb-0">
+                    <label class="form-label mb-1" t-attf-for="o_ompay_card_cvv_{{provider_id}}">
+                        <small>Security code</small>
+                    </label>
+                    <input type="text"
+                           t-attf-id="o_ompay_card_cvv_{{provider_id}}"
+                           name="o_ompay_card_cvv"
+                           class="form-control"
+                           inputmode="numeric"
+                           autocomplete="cc-csc"
+                           maxlength="4"
+                           placeholder="123"/>
+                </div>
+            </div>
+        </div>
+    </template>
+
+</odoo>
