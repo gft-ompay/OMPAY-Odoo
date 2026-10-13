@@ -2,7 +2,7 @@
 
 {
     'name': "OMPAY Payment Gateway",
-    'version': '19.0.2.0.1',
+    'version': '19.0.2.0.2',
     'category': 'Accounting/Payment Providers',
     'sequence': 350,
     'summary': "Accept card payments in Omani Rial through OMPAY.",

@@ -12,6 +12,9 @@ from odoo.addons.ompay_tp_plugin import const
 
 _logger = get_payment_logger(__name__, const.SENSITIVE_KEYS)
 
+# How many transactions the polling cron works through between batches.
+POLL_BATCH_SIZE = 100
+
 
 class PaymentTransaction(models.Model):
     _inherit = 'payment.transaction'
@@ -195,6 +198,16 @@ class PaymentTransaction(models.Model):
                 "OMPAY declined the payment: %s",
                 payment_data.get('error_message') or _("no reason given"),
             ))
+        elif status in const.PAYMENT_STATUS_MAPPING['cancel']:
+            if self.state == 'done':
+                # Odoo cannot move a confirmed payment backwards, so leave a trail for
+                # the merchant to reconcile by hand.
+                self._log_message_on_linked_documents(_(
+                    "OMPAY reports this payment as REVERSED. Review the order and refund"
+                    " or reconcile it manually."
+                ))
+            else:
+                self._set_canceled(_("The payment was reversed at OMPAY."))
         else:
             self._set_error(_("Unknown payment status received from OMPAY: %s", status))
 
@@ -209,29 +222,35 @@ class PaymentTransaction(models.Model):
         real outcome so a paid order is never left looking unpaid.
         """
         stale_cutoff = fields.Datetime.now() - timedelta(days=7)
-        transactions = self.search([
+        # A transaction without a provider reference never reached OMPAY (an inline
+        # form that was never submitted, say), so there is nothing to ask about and
+        # it would fail every poll. Leaving those out, and walking the whole backlog
+        # in batches, keeps them from crowding out payments that really are in flight.
+        tx_ids = self.search([
             ('provider_code', '=', 'ompay'),
             ('state', 'in', ['draft', 'pending']),
+            ('provider_reference', '!=', False),
             ('create_date', '>=', stale_cutoff),
-        ], limit=100, order='create_date asc')
+        ], order='create_date desc').ids
 
-        if not transactions:
+        if not tx_ids:
             return
 
-        _logger.info("Polling %d pending OMPAY transaction(s).", len(transactions))
+        _logger.info("Polling %d pending OMPAY transaction(s).", len(tx_ids))
 
-        for tx in transactions:
-            try:
-                payment_data = tx._ompay_fetch_payment_data()
-            except ValidationError as error:
-                _logger.warning(
-                    "Could not poll OMPAY transaction %s: %s", tx.reference, error
-                )
-                continue
+        for start in range(0, len(tx_ids), POLL_BATCH_SIZE):
+            for tx in self.browse(tx_ids[start:start + POLL_BATCH_SIZE]):
+                try:
+                    payment_data = tx._ompay_fetch_payment_data()
+                except ValidationError as error:
+                    _logger.warning(
+                        "Could not poll OMPAY transaction %s: %s", tx.reference, error
+                    )
+                    continue
 
-            status = (payment_data.get('status') or '').upper()
-            if status in const.PAYMENT_STATUS_MAPPING['pending']:
-                continue  # Genuinely still in flight; leave it alone.
+                status = (payment_data.get('status') or '').upper()
+                if status in const.PAYMENT_STATUS_MAPPING['pending']:
+                    continue  # Genuinely still in flight; leave it alone.
 
-            tx._process('ompay', payment_data)
-            self.env.cr.commit()  # Keep a slow provider from losing resolved transactions.
+                tx._process('ompay', payment_data)
+                self.env.cr.commit()  # Keep a slow provider from losing resolved transactions.

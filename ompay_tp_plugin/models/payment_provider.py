@@ -169,8 +169,17 @@ class PaymentProvider(models.Model):
         except ValueError:
             return response.text
 
+        if not isinstance(payload, dict):
+            return response.text
+
         error_code = payload.get('error') or ''
         message = payload.get('message') or ''
+
+        # A declined refund comes back as `{"success": false, "data": {"error_message": ...}}`
+        # with no top-level message, so the reason lives one level down.
+        data = payload.get('data')
+        if not message and isinstance(data, dict):
+            message = data.get('error_message') or ''
 
         # Field-level validation errors carry the detail the merchant needs.
         details = payload.get('details') or []

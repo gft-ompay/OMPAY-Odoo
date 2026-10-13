@@ -39,10 +39,12 @@ ENDPOINT_INQUIRY = '/transactions/inquiry'
 ENDPOINT_REFUND = '/transactions/%s/refund'
 
 # Mapping of OMPAY transaction statuses to Odoo payment transaction states.
-# OMPAY lifecycle: PENDING -> PROCESSING -> SUCCESSFUL | FAILED.
+# OMPAY lifecycle: PENDING -> PROCESSING -> SUCCESSFUL | FAILED. REVERSED is a
+# terminal state reached when a payment is voided at OMPAY.
 PAYMENT_STATUS_MAPPING = {
     'pending': ('PENDING', 'PROCESSING'),
     'done': ('SUCCESSFUL',),
+    'cancel': ('REVERSED',),
     'error': ('FAILED',),
 }
 
